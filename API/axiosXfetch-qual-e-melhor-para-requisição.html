@@ -109,7 +109,6 @@ A URL usada está com erro no seu exemplo (jasonplaceholder), o correto é:
 https://jsonplaceholder.typicode.com/todos
 
 
----
 
 📦 1. GET com fetch()
 
@@ -180,91 +179,6 @@ response.data	Onde o Axios guarda os dados já prontos
 
 
 
-
-
-
-
-
-
-
-
-
-✅ Como fazer requisição GET com fetch e axios
-
-🧠 Objetivo:
-
-Buscar dados de uma API pública fictícia chamada JSONPlaceholder, usada para testes.
-
-https://jsonplaceholder.typicode.com/todos
-
-
-
-📦 1. GET com fetch()
-
-📜 Código:
-
-fetch('https://jsonplaceholder.typicode.com/todos')
-  // Faz a requisição para a API
-
-  .then((response) => response.json())
-  // Converte a resposta em JSON (que é o formato dos dados)
-
-  .then((data) => {
-    console.log(data); // Mostra os dados recebidos no console
-  })
-
-  .catch((error) => {
-    console.log("Erro:", error); // Se der erro, mostra no console
-  });
-
-🧩 Explicando passo a passo:
-
-fetch(url) → inicia uma requisição para a API.
-
-.then(res => res.json()) → converte a resposta (que vem “crua”) para um objeto JavaScript.
-
-.then(data => { ... }) → aqui você já pode usar os dados (exibir, tratar, etc.).
-
-.catch(err => { ... }) → serve para capturar qualquer erro (API fora do ar, erro de internet, etc.).
-
-
-
----
-
-⚡ 2. GET com axios.get()
-
-📜 Código:
-
-axios.get('https://jsonplaceholder.typicode.com/todos')
-  .then((response) => {
-    console.log(response.data); // Mostra os dados recebidos
-  })
-  .catch((error) => {
-    console.log("Erro:", error); // Se der erro, mostra aqui
-  });
-
-🧩 Explicando passo a passo:
-
-axios.get(url) → já faz a requisição e automaticamente transforma a resposta em JSON.
-
-response.data → é onde estão os dados da resposta.
-
-.catch(error) → trata erros da mesma forma que no fetch.
-
-
-
----
-
-🧪 Comparando o que você usou:
-
-O que foi usado	Explicação
-
-fetch()	Função nativa do navegador para fazer requisições HTTP
-.then()	Usado para lidar com a resposta da requisição (espera a promessa resolver)
-.json()	Converte o corpo da resposta em um objeto JavaScript
-axios.get()	Função da biblioteca Axios para fazer requisição GET
-response.data	Onde o Axios guarda os dados já prontos
-.catch()	Captura erros caso algo dê errado
 
 
 -->

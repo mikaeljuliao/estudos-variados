@@ -4,9 +4,13 @@ oque é uma api? conceitos e como usar:
 
 
 O que é uma API?
-API é a sigla para Application Programming Interface, que em português significa Interface de Programação de Aplicações.
+API é a sigla para Application Programming Interface, que em português significa 
+Interface de Programação de Aplicações.
 
-Uma API funciona como um intermediador (ou um garçom) entre dois sistemas. Ela recebe um pedido de um lado (por exemplo, o seu sistema) e leva esse pedido até outro sistema que possui os dados (como um servidor ou banco de dados). Depois, ela traz a resposta de volta.
+Uma API funciona como um intermediador (ou um garçom) entre dois sistemas. 
+Ela recebe um pedido de um lado (por exemplo, o seu sistema) e leva esse 
+pedido até outro sistema que possui os dados (como um servidor ou banco de dados). 
+Depois, ela traz a resposta de volta.
 
 Exemplo prático:
 Imagine que você está criando um site de e-commerce e precisa calcular o valor do frete para um produto.
@@ -14,7 +18,8 @@ Em vez de criar um banco de dados gigantesco com todos os CEPs do Brasil, você 
 API de um serviço de frete (como dos Correios ou outras transportadoras), que já possui essas 
 informações atualizadas.
 
-Assim, você envia o CEP de destino para a API, e ela retorna o valor do frete. Isso economiza tempo, recursos e torna seu sistema mais inteligente e leve.
+Assim, você envia o CEP de destino para a API, e ela retorna o valor do frete. 
+Isso economiza tempo, recursos e torna seu sistema mais inteligente e leve.
 
 
 Resumo:
@@ -58,12 +63,12 @@ Quase toda vaga pede que você saiba consumir APIs REST.
 🔧 Como funciona uma API REST?
 A comunicação acontece por requisições HTTP com métodos como:
 
-Método	O que faz	Exemplo
+Método	       O que faz	         Exemplo
 
 GET	           Buscar dados         Buscar lista de produtos
-POST	      Enviar/criar dados	Criar novo usuário
-PUT	             Atualizar dados	Atualizar endereço do cliente
-DELETE      	Deletar dados	    Excluir um produto
+POST	      Enviar/criar dados	    Criar novo usuário
+PUT	             Atualizar dados	  Atualizar endereço do cliente
+DELETE      	Deletar dados	        Excluir um produto
  
 
 Esses métodos são feitos para endpoints (endereços da API), como:
@@ -87,7 +92,9 @@ ex:
 
 🧱 Como a API REST é defendida (seus princípios)
 
-A arquitetura REST é defendida com base em seis princípios fundamentais, definidos por Roy Fielding (o criador do conceito). Esses princípios garantem que a API seja escalável, simples e eficiente:
+A arquitetura REST é defendida com base em seis princípios fundamentais, 
+definidos por Roy Fielding (o criador do conceito). Esses princípios garantem que a 
+API seja escalável, simples e eficiente:
 1. Interface uniforme
 Toda comunicação segue o mesmo padrão. Exemplo: GET sempre para buscar, POST sempre para criar.
 Facilita a compreensão e o uso da API por diferentes sistemas.
@@ -128,7 +135,6 @@ fetch("https://api.exemplo.com/usuarios")
   .catch(err => console.error("Erro:", err));
 
 
----
 
 🛠️ Exemplo real (com API pública)
 
