@@ -1,0 +1,349 @@
+<!--
+
+✅ O que é fetch?
+
+- É uma API nativa do JavaScript que permite que um aplicativo faça requisições HTTP 
+(como GET, POST, PUT, DELETE) para acessar dados de servidores externos, como uma API.
+- Pode ser usada para buscar conteúdos externos pela internet, diretamente do navegador.
+- É suportada por quase todos os navegadores modernos.
+- É uma alternativa mais moderna ao antigo método XMLHttpRequest (XHR),
+ usado antes do fetch para fazer requisições HTTP.
+- Retorna uma Promise, o que significa que você pode usar .then(), .catch() 
+ou async/await para trabalhar com as respostas.
+
+
+📌 Exemplo:
+fetch("https://viacep.com.br/ws/01001000/json/")
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error("Erro:", error));
+
+
+✅ O que é Axios?
+
+- É uma biblioteca JavaScript externa (ou seja, precisa instalar com npm install axios) que também permite fazer requisições HTTP.
+- É baseada na ideia do fetch, mas oferece funcionalidades a mais, como:
+- Cancelar requisições:
+ .Interceptar requisições e respostas
+ .Tratar erros de forma mais clara
+ .Enviar dados automaticamente como JSON
+ .Lidar melhor com headers e autenticação
+- É compatível com navegadores modernos e também pode ser usada em aplicações Node.js (backend).
+- Muito usada em projetos com React, Vue, Angular e Node.
+
+📌 Exemplo com Axios:
+import axios from "axios";
+
+axios.get("https://viacep.com.br/ws/01001000/json/")
+  .then(res => console.log(res.data))
+  .catch(err => console.error("Erro:", err));
+
+
+
+
+
+⚔️ Axios vs Fetch
+📌 Diferenças principais:
+
+- fetch é uma API nativa do navegador (não precisa instalar), mas requer mais
+código para lidar com erros, converter a resposta em JSON e cancelar requisições.
+
+- axios é uma biblioteca externa (precisa instalar com npm install axios) que 
+oferece uma API mais simples e intuitiva, facilitando o uso em projetos maiores ou 
+com APIs mais complexas.
+
+
+🔍 Comparação lado a lado:
+
+Recurso	                        fetch            	                  axios
+
+- Disponibilidade	             Nativo no navegador  	       Requer instalação (npm install axios)
+- Conversão automática         ❌Precisa usar .json()	        ✅Já retorna os dados prontos (res.data)
+para JSON	
+- Tratamento de erros HTTP     ❌Manual (verificar res.ok)	    ✅ Automático
+- Cancelamento de              ❌ Difícil, precisa de 	        ✅ Possui método nativo CancelToken
+requisições	                 AbortController
+- Interceptadores de           ❌ Não possui                   ✅ Sim (útil pra tokens, loading etc.)
+requisição	
+- Suporte ao Node.js	       ❌ Só no navegador	            ✅ Também no backend
+- Envio de headers e tokens    ✅ Sim, mas com mais código	    ✅ Mais direto e limpo
+
+
+🧠 Resumo prático:
+- Use fetch se quiser uma solução leve, sem instalar nada, 
+e se você tiver controle do fluxo (ex: testes, projetos pequenos, estudos).
+
+- Use axios quando:
+ .o projeto é maior,
+ .precisa de tratamento de erro mais limpo,
+ .precisa enviar tokens, headers ou interceptar requisições,
+ .ou você está usando React com autenticação, por exemplo.
+
+
+ maneira de importar o axios:
+ passo a passo:
+ - vou no site cdn js que é um site que oferece varios cdn pra varios serviçoes
+ - ja no site eu digito axios e clico no primeiro que aparecer
+ - após clicar, ele vai mostrar varias opçoes de importação, escolho a que eu quiser
+ e copio o codigo (simbolo de copy Script tag </>)
+ - depois colo o codigo em cima do nosso script do javscript
+
+
+
+
+
+
+
+
+
+
+
+ ✅ Como fazer requisição GET com fetch e axios
+
+🧠 Objetivo:
+
+Buscar dados de uma API pública fictícia chamada JSONPlaceholder, usada para testes.
+
+A URL usada está com erro no seu exemplo (jasonplaceholder), o correto é:
+
+https://jsonplaceholder.typicode.com/todos
+
+
+---
+
+📦 1. GET com fetch()
+
+📜 Código:
+
+fetch('https://jsonplaceholder.typicode.com/todos')
+  // Faz a requisição para a API
+
+  .then((response) => response.json())
+  // Converte a resposta em JSON (que é o formato dos dados)
+
+  .then((data) => {
+    console.log(data); // Mostra os dados recebidos no console
+  })
+
+  .catch((error) => {
+    console.log("Erro:", error); // Se der erro, mostra no console
+  });
+
+🧩 Explicando passo a passo:
+
+fetch(url) → inicia uma requisição para a API.
+
+.then(res => res.json()) → converte a resposta (que vem “crua”) para um objeto JavaScript.
+
+.then(data => { ... }) → aqui você já pode usar os dados (exibir, tratar, etc.).
+
+.catch(err => { ... }) → serve para capturar qualquer erro (API fora do ar, erro de internet, etc.).
+
+
+
+---
+
+⚡ 2. GET com axios.get()
+
+📜 Código:
+
+axios.get('https://jsonplaceholder.typicode.com/todos')
+  .then((response) => {
+    console.log(response.data); // Mostra os dados recebidos
+  })
+  .catch((error) => {
+    console.log("Erro:", error); // Se der erro, mostra aqui
+  });
+
+🧩 Explicando passo a passo:
+
+axios.get(url) → já faz a requisição e automaticamente transforma a resposta em JSON.
+
+response.data → é onde estão os dados da resposta.
+
+.catch(error) → trata erros da mesma forma que no fetch.
+
+
+
+---
+
+🧪 Comparando o que você usou:
+
+O que foi usado	Explicação
+
+fetch()	Função nativa do navegador para fazer requisições HTTP
+.then()	Usado para lidar com a resposta da requisição (espera a promessa resolver)
+.json()	Converte o corpo da resposta em um objeto JavaScript
+axios.get()	Função da biblioteca Axios para fazer requisição GET
+response.data	Onde o Axios guarda os dados já prontos
+.catch()	Captura erros caso algo dê errado
+
+
+
+
+
+
+
+
+
+
+
+
+✅ Como fazer requisição GET com fetch e axios
+
+🧠 Objetivo:
+
+Buscar dados de uma API pública fictícia chamada JSONPlaceholder, usada para testes.
+
+https://jsonplaceholder.typicode.com/todos
+
+
+
+📦 1. GET com fetch()
+
+📜 Código:
+
+fetch('https://jsonplaceholder.typicode.com/todos')
+  // Faz a requisição para a API
+
+  .then((response) => response.json())
+  // Converte a resposta em JSON (que é o formato dos dados)
+
+  .then((data) => {
+    console.log(data); // Mostra os dados recebidos no console
+  })
+
+  .catch((error) => {
+    console.log("Erro:", error); // Se der erro, mostra no console
+  });
+
+🧩 Explicando passo a passo:
+
+fetch(url) → inicia uma requisição para a API.
+
+.then(res => res.json()) → converte a resposta (que vem “crua”) para um objeto JavaScript.
+
+.then(data => { ... }) → aqui você já pode usar os dados (exibir, tratar, etc.).
+
+.catch(err => { ... }) → serve para capturar qualquer erro (API fora do ar, erro de internet, etc.).
+
+
+
+---
+
+⚡ 2. GET com axios.get()
+
+📜 Código:
+
+axios.get('https://jsonplaceholder.typicode.com/todos')
+  .then((response) => {
+    console.log(response.data); // Mostra os dados recebidos
+  })
+  .catch((error) => {
+    console.log("Erro:", error); // Se der erro, mostra aqui
+  });
+
+🧩 Explicando passo a passo:
+
+axios.get(url) → já faz a requisição e automaticamente transforma a resposta em JSON.
+
+response.data → é onde estão os dados da resposta.
+
+.catch(error) → trata erros da mesma forma que no fetch.
+
+
+
+---
+
+🧪 Comparando o que você usou:
+
+O que foi usado	Explicação
+
+fetch()	Função nativa do navegador para fazer requisições HTTP
+.then()	Usado para lidar com a resposta da requisição (espera a promessa resolver)
+.json()	Converte o corpo da resposta em um objeto JavaScript
+axios.get()	Função da biblioteca Axios para fazer requisição GET
+response.data	Onde o Axios guarda os dados já prontos
+.catch()	Captura erros caso algo dê errado
+
+
+-->
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Axios X Fetch</title>
+ </head>
+ <body>
+    
+
+    <script 
+    src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.10.0/axios.min.js" integrity="sha512-WkZrEcQ5LMyNy6Y2PQf+Tu3vMcsmKKRKuPXtJSTHQJ3mpuvLRlA5dlDDhrrcXfyWr6Z/y3wIMfjfqVFO/gDZYQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+      
+   
+    // 1 get Fetch
+     fetch('https://jasonplaceholder.typicode.com/todos')
+     // aqui já simboliza a requisição da api json placeholder
+
+     // transformando em objetos javascript validas
+     .then((Response) => Response.json())
+     .then((data) => {
+        console.log(data)
+     })
+     .catch((error) => {
+        console.log(error)
+     });
+
+    // 2 get com Axios
+    axios.get('https://jasonplaceholder.typicode.com/todos').then((Response) => {
+        console.log(Response.data)
+    })
+     .catch((error) => {
+        console.log(error)
+     });
+
+
+
+     
+     // 3 - POST com fetch
+     const data = {
+        title: "alguam titúlo",
+        content: "algum conteudo...",
+        userId: 1
+     }
+    
+     fetch('https://jasonplaceholder.typicode.com/posts', {
+        method: 'POST',
+        headers: {
+            "content´type": "application/json"
+        },
+        body: json.stringfy(data),
+     })
+     // extraindo as respostas do fetch
+      .then((Response) => Response.json())
+     .then((data) => {
+        console.log(data)
+     })
+     .catch((error) => {
+        console.log(error)
+     });
+    
+
+
+     
+     // 4 - POST com axios
+     axios.post('https://jasonplaceholder.typicode.com/posts', data)
+     // extraindo as respostas do axio
+     .then((Response) => {
+        console.log(Response.data)
+    })
+     .catch((error) => {
+        console.log(error)
+     });
+
+
+</script>
+ </body>
+ </html>

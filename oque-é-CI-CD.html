@@ -1,0 +1,188 @@
+    <!--
+
+✅ O que é CI/CD?
+
+CI/CD é uma prática muito comum e valorizada no desenvolvimento moderno — e está presente em muitas vagas para desenvolvedores, inclusive júnior.
+
+CI/CD é a sigla para:
+
+CI = Continuous Integration (Integração Contínua)
+
+CD = Continuous Delivery (Entrega Contínua) ou Continuous Deployment (Implantação Contínua)
+
+
+
+---
+
+🛠️ Explicando cada um
+
+🔁 CI – Integração Contínua
+
+Significa que os desenvolvedores integram seus códigos com frequência (várias vezes ao dia, por exemplo), e o código é testado automaticamente assim que enviado para o repositório (como o GitHub).
+
+Objetivos:
+
+Detectar erros cedo
+
+Garantir que o código novo não quebre nada no projeto
+
+Automatizar testes e validações
+
+
+Ferramentas comuns:
+GitHub Actions, GitLab CI, Jenkins, CircleCI
+
+
+---
+
+🚀 CD – Entrega Contínua / Implantação Contínua
+
+1. Continuous Delivery (Entrega Contínua):
+Depois que o código é testado com sucesso (via CI), ele está pronto para ser colocado em produção, mas a publicação ainda é manual.
+
+2. Continuous Deployment (Implantação Contínua):
+É o nível seguinte: o sistema implanta automaticamente o código em produção após passar pelos testes, sem precisar de ação humana.
+
+
+---
+
+
+
+🧑‍💻 Situação Real: CI/CD em um projeto React com equipe colaborando
+
+📦 O cenário:
+Você está trabalhando em um sistema web com outros desenvolvedores. 
+Cada um tem sua tarefa (feature) e está usando GitHub como repositório
+e GitHub Actions como ferramenta de CI/CD. O projeto está hospedado no Vercel.
+
+
+📋 Sua tarefa:
+Você ficou responsável por criar uma nova tela chamada "Painel de Usuário" 
+no projeto. Você desenvolve no seu computador usando React.
+
+
+✅ Etapas completas de CI/CD:
+
+🧑‍💻 1. Você faz seu código localmente
+- Cria a tela nova com React
+- Testa no navegador
+- Usa npm run lint para checar o padrão de código
+- Tudo certo até aqui
+
+
+🌐 2. Você faz um commit e dá push no GitHub
+- git add .
+- git commit -m "feat: adiciona painel de usuário"
+- git push origin minha-branch
+
+
+🛠️ 3. CI entra em ação automaticamente (GitHub Actions):
+Assim que você deu push, o CI (Integração Contínua) começa um pipeline automático. Ele faz:
+
+1. Instala dependências (npm install)
+2. Roda os testes (npm test)
+Testa se seu novo componente não quebrou outros
+3. Roda o linter (eslint)
+Verifica se você seguiu o padrão do time
+4. Faz o build do projeto (npm run build)
+Garante que o app ainda compila normalmente
+
+❌ Se der erro:
+- O pipeline falha
+- Você recebe um aviso no GitHub (vermelho)
+- Seu código não pode ser mesclado até corrigir
+
+
+✅ Se der tudo certo:
+- O pipeline mostra tudo verde
+- Você abre um Pull Request (PR)
+- Outro dev do time revisa seu código
+- Se aprovado, dão o merge na branch principal (main)
+
+
+🚀 4. CD entra em ação (Continuous Delivery ou Deployment)
+Assim que o código é mesclado na main, a CD (Entrega ou Implantação Contínua) começa:
+- O Vercel é notificado automaticamente
+- Ele pega o código novo
+- Roda os comandos de build e deploy
+- Em minutos, o novo “Painel de Usuário” está no ar em produção
+
+
+💡 Resultado Final:
+Sem você fazer deploy manual, nem zipar pasta, nem mexer no servidor.
+Seu código foi testado, validado e publicado sozinho com CI/CD.
+
+
+🧠 Em resumo:
+
+> CI/CD = Automatizar testes e publicação de código.
+Ajuda o time a lançar atualizações com mais rapidez, segurança e menos bugs.
+
+
+
+
+
+
+📌 Termos Relacionados
+
+📌 1. Pipeline
+
+O que é:
+Um pipeline é uma sequência automatizada de passos que acontece em uma ordem 
+definida — geralmente para compilar, testar e implantar seu código.
+É o fluxo completo de automações do CI/CD.
+
+
+---
+
+⚙️ Na prática:
+
+Imagine uma esteira de fábrica que:
+
+1. Recebe o código novo
+
+
+2. Roda os testes
+
+
+3. Compila o projeto
+
+
+4. Gera a versão de produção
+
+
+5. Publica o site automaticamente
+
+
+
+Cada um desses passos é chamado de stage (etapa), e o conjunto todo é o pipeline.
+
+Ferramentas que usam pipelines:
+GitHub Actions, GitLab CI, Jenkins, Bitbucket Pipelines
+
+
+---
+
+📌 2. Job
+
+O que é:
+Um job é uma tarefa individual dentro de um pipeline.
+
+
+---
+
+⚙️ Na prática:
+
+Pensa no pipeline como uma sequência, e os jobs são as ações que acontecem dentro dele, como:
+
+Um job que instala dependências (npm install)
+
+Um job que executa os testes (npm test)
+
+Um job que faz o deploy (npm run deploy)
+
+
+Os jobs podem rodar em paralelo ou em sequência, dependendo da configuração.
+
+
+-->

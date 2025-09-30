@@ -1,0 +1,186 @@
+<!--
+
+
+🧼 O que é Clean Code?
+
+Clean Code (Código Limpo) é uma forma de escrever código que seja:
+
+Claro
+
+Fácil de entender
+
+Fácil de manter e evoluir — tanto para você quanto para qualquer pessoa que for ler depois (inclusive você mesmo no futuro)
+
+
+Ele foi popularizado pelo livro "Clean Code: A Handbook of Agile Software Craftsmanship", do Robert C. Martin (também conhecido como Uncle Bob), que é uma das maiores referências nesse assunto.
+
+
+---
+
+✅ Por que escrever Clean Code?
+
+Evita confusão e bugs
+
+Facilita a leitura e manutenção
+
+Ajuda o time a trabalhar junto
+
+Torna o código mais profissional
+
+Deixa o projeto mais escalável
+
+Evita que o sistema tenha que ser reescrito do zero futuramente por estar “insuportável de manter”, o que gera menos custo para a empresa e evita retrabalho
+
+
+Código ruim envelhece mal. À medida que vai recebendo ajustes e remendos, pode se tornar tão confuso e quebrado que compensa mais jogar tudo fora e refazer — e isso custa muito dinheiro e tempo para o time e a empresa.
+
+O Clean Code é justamente a prevenção disso.
+
+
+
+🔧 Principais Práticas do Clean Code (Agora com Explicações Detalhadas)
+
+
+1. 📛 Nomes claros e descritivos
+
+Regra: Dê nomes que explicam o que a variável, função ou componente faz — sem precisar de comentários.
+
+✅ Bom:
+
+const precoComDesconto = calcularDesconto(produto.preco);
+
+❌ Ruim:
+
+const p = a(b);
+
+💡 Dica: se o nome for bom o suficiente, *você quase nunca precisa de comentário explicando o que faz.
+
+
+---
+
+2. 📦 Funções pequenas e com uma responsabilidade
+
+Regra: Cada função deve fazer uma única coisa.
+Se ela faz mais de uma coisa, separe.
+
+✅ Bom:
+
+function salvarPedido() { ... }
+function notificarCliente() { ... }
+function atualizarEstoque() { ... }
+
+❌ Ruim:
+
+function processarPedido() {
+  salvar();
+  enviarEmail();
+  descontarProduto();
+  atualizarPagamento();
+  imprimirNota();
+}
+
+💡 Quanto menor e mais específica for sua função, mais fácil de testar, reutilizar e manter.
+
+
+---
+
+3. 💬 Evite comentários desnecessários
+
+Regra: Se você precisa explicar o que seu código faz com um comentário, talvez ele não esteja claro o suficiente.
+
+✅ Bom:
+
+function calcularTotalComFrete(valor, frete) {
+  return valor + frete;
+}
+
+❌ Ruim:
+
+// Função que soma dois valores
+function a(x, y) {
+  return x + y;
+}
+
+🟡 Quando usar comentário:
+
+Regras de negócio complexas
+
+Trechos que precisam de contexto histórico
+
+Alertas de decisão técnica
+
+
+
+---
+
+4. 🧱 DRY – Don’t Repeat Yourself (Não se repita)
+
+Regra: Não repita código. Reutilize funções e componentes.
+Repetição cria mais chances de erro e dificulta atualizações.
+
+❌ Ruim (repetição):
+
+const precoFinal1 = produto.preco * 0.9;
+const precoFinal2 = produto.preco * 0.9;
+const precoFinal3 = produto.preco * 0.9;
+
+✅ Bom (reutilização):
+
+function aplicarDesconto(valor) {
+  return valor * 0.9;
+}
+
+
+---
+
+5. 🧹 Regra do Escoteiro
+
+> "Sempre que passar por um lugar, deixe ele melhor do que encontrou."
+
+
+
+Essa ideia se aplica ao código também.
+Se você for editar uma função e perceber que ela está bagunçada, melhore o 
+que puder — mesmo que seja só renomear uma variável mal nomeada.
+
+Isso evita o acúmulo de "lixo" no código ao longo do tempo e mantém o projeto saudável.
+
+
+---
+
+6. 📁 Organização é parte do Clean Code
+
+Separe bem os arquivos (por funcionalidade, componentes, serviços, etc.)
+
+Dê nomes claros para pastas e arquivos
+
+Evite deixar código morto ou comentado sem motivo
+
+
+
+---
+
+7. 🧪 Código limpo é código fácil de testar
+
+Se você aplica Clean Code, seu código automaticamente:
+
+Tem funções pequenas e isoladas
+
+É mais fácil de cobrir com testes unitários
+
+É mais previsível
+
+
+
+---
+
+🎯 Em resumo:
+
+> Clean Code não é frescura: é escrever código como se outra pessoa fosse mantê-lo amanhã.
+E essa pessoa pode ser você mesmo — depois de 6 meses.
+
+
+
+
+
+-->

@@ -1,0 +1,170 @@
+<!--
+
+oque é uma api? conceitos e como usar:
+
+
+O que é uma API?
+API é a sigla para Application Programming Interface, que em português significa Interface de Programação de Aplicações.
+
+Uma API funciona como um intermediador (ou um garçom) entre dois sistemas. Ela recebe um pedido de um lado (por exemplo, o seu sistema) e leva esse pedido até outro sistema que possui os dados (como um servidor ou banco de dados). Depois, ela traz a resposta de volta.
+
+Exemplo prático:
+Imagine que você está criando um site de e-commerce e precisa calcular o valor do frete para um produto.
+Em vez de criar um banco de dados gigantesco com todos os CEPs do Brasil, você pode utilizar a 
+API de um serviço de frete (como dos Correios ou outras transportadoras), que já possui essas 
+informações atualizadas.
+
+Assim, você envia o CEP de destino para a API, e ela retorna o valor do frete. Isso economiza tempo, recursos e torna seu sistema mais inteligente e leve.
+
+
+Resumo:
+
+- API é um serviço de terceiros que permite buscar ou enviar informações entre sistemas.
+- Ela funciona como um garçom, intermediando a comunicação entre seu site/aplicativo e outro serviço.
+- Muito usada para integrações com serviços externos (ex: correios, clima, pagamentos, etc).
+
+
+
+
+tipos de api mais requisitada atualmente no mercado:
+- SOAP : XML-based, strict, favored in enterprises
+- REST : Building Scalable APIs using standard HTTP Methods ( a mais famosa e requistada atualmente)
+- GraphQL : Query language for APIs, Allowing Clients to Request Specific data
+- gRPC : High performace Framework For Remote Procedure Calls, Using HTTP/2
+- WebSocket : Bidirectional, Real Time Communication Protocol
+- Webhook : Event-Driven, Server-Side Mechanism that sends HTTP Callbacks
+- MQTT : Lightweight messaging protocol for contrained devices
+- AMQP : Open messaging protocol for reliable communication.
+
+
+
+
+
+
+
+✅ O que é uma API REST?
+REST é a sigla para Representational State Transfer.
+Uma API REST é um estilo de API que segue um conjunto de regras para permitir que diferentes 
+sistemas se comuniquem pela internet, usando o protocolo HTTP (o mesmo dos sites).
+
+
+---
+
+🧠 Por que a REST é importante para devs?
+Porque é o padrão mais usado no mundo para criar APIs.
+Se você vai trabalhar com React, Node.js, Next.js, Laravel, Django, etc., vai usar ou criar REST APIs.
+Quase toda vaga pede que você saiba consumir APIs REST.
+
+🔧 Como funciona uma API REST?
+A comunicação acontece por requisições HTTP com métodos como:
+
+Método	O que faz	Exemplo
+
+GET	           Buscar dados         Buscar lista de produtos
+POST	      Enviar/criar dados	Criar novo usuário
+PUT	             Atualizar dados	Atualizar endereço do cliente
+DELETE      	Deletar dados	    Excluir um produto
+ 
+
+Esses métodos são feitos para endpoints (endereços da API), como:
+GET https://api.meusite.com/produtos
+POST https://api.meusite.com/usuarios
+
+
+---
+
+📦 Formato das respostas: JSON
+A maioria das APIs REST envia e recebe dados no formato JSON, que é fácil de ler e usar em JavaScript:
+ex:
+{
+  "nome": "Mikael",
+  "idade": 22,
+  "email": "mikael@email.com"
+}
+
+
+---
+
+🧱 Como a API REST é defendida (seus princípios)
+
+A arquitetura REST é defendida com base em seis princípios fundamentais, definidos por Roy Fielding (o criador do conceito). Esses princípios garantem que a API seja escalável, simples e eficiente:
+1. Interface uniforme
+Toda comunicação segue o mesmo padrão. Exemplo: GET sempre para buscar, POST sempre para criar.
+Facilita a compreensão e o uso da API por diferentes sistemas.
+
+2. Comunicação cliente-servidor
+O cliente (navegador ou app) e o servidor são separados.
+Isso permite que eles evoluam de forma independente.
+
+3. Sem estado (Stateless)
+Cada requisição deve conter todas as informações necessárias. 
+O servidor não guarda o histórico da comunicação.
+Isso deixa a API mais leve e fácil de escalar.
+
+4. Cacheável
+As respostas podem ser armazenadas em cache para melhorar o 
+desempenho e reduzir o número de chamadas ao servidor.
+
+5. Sistema em camadas (Layered System)
+A arquitetura pode ser dividida em camadas (ex: autenticação, 
+banco de dados, cache), mantendo organização e segurança.
+
+6. Código sob demanda (opcional)
+Em alguns casos, o servidor pode enviar scripts executáveis
+(como JavaScript), embora isso não seja comum nem obrigatório.
+
+Esses princípios tornam as APIs REST mais padronizadas, reutilizáveis, seguras e escaláveis, o que explica por que o mercado valoriza tanto esse modelo.
+
+
+---
+
+🚀 Como consumir uma API REST no front-end (ex: React ou JS puro)
+
+fetch("https://api.exemplo.com/usuarios")
+  .then(res => res.json())
+  .then(data => {
+    console.log(data); // exibe a resposta no console
+  })
+  .catch(err => console.error("Erro:", err));
+
+
+---
+
+🛠️ Exemplo real (com API pública)
+
+ViaCEP (busca de endereço por CEP):
+
+fetch("https://viacep.com.br/ws/01001000/json/")
+  .then(res => res.json())
+  .then(data => {
+    console.log(data.logradouro); // mostra o nome da rua
+  });
+
+
+🧪 O que pode cair em entrevista/teste técnico:
+
+Fazer uma requisição GET e mostrar os dados na tela
+
+Usar useEffect() e useState() no React para buscar dados de API
+
+Criar um formulário que envia dados via POST
+
+Tratar erros e exibir mensagens para o usuário
+
+Lidar com loading
+
+
+
+✅ Resumo prático:
+
+API REST permite que sistemas conversem via internet com regras bem definidas.
+
+Usa HTTP + JSON.
+
+É essencial saber consumir e, se possível, criar uma (com Node/Express por exemplo).
+
+É baseada em princípios sólidos que garantem padronização, escalabilidade e simplicidade.
+
+É uma das habilidades mais cobradas em vagas júnior.
+
+-->
