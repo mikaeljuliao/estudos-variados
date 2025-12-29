@@ -1,0 +1,281 @@
+<!--
+========================================================
+PARTE 1 — PROMISE, ASYNC E AWAIT
+Autor: Mikael Juliao
+Objetivo: Entender DO ZERO, com profundidade
+========================================================
+
+
+====================================
+1. PRIMEIRO DE TUDO: O PROBLEMA REAL
+====================================
+
+No JavaScript, algumas operações DEMORAM:
+- Buscar dados de uma API
+- Ler arquivos
+- Esperar tempo (setTimeout)
+- Acessar banco de dados
+
+Essas coisas NÃO acontecem instantaneamente.
+
+Se o JavaScript fosse esperar tudo terminar:
+❌ A aplicação travaria
+❌ A tela congelaria
+❌ O usuário ficaria esperando
+
+Então o JS precisa de uma forma de dizer:
+"Isso aqui vai demorar, mas não trava o resto do código"
+
+
+====================================
+2. PROMISE — O CONCEITO MAIS IMPORTANTE
+====================================
+
+Promise é um OBJETO que representa algo que:
+- Ainda NÃO aconteceu
+- Mas VAI acontecer no futuro
+
+Uma Promise é como uma "promessa" mesmo:
+👉 "Eu prometo que vou te entregar um resultado depois"
+
+Ela pode terminar de 2 formas:
+- Sucesso  → resolve(valor)
+- Erro     → reject(erro)
+
+Estados da Promise:
+- pending   → ainda acontecendo
+- fulfilled → sucesso
+- rejected  → erro
+
+
+====================================
+3. PROMISE NA PRÁTICA (EXEMPLO SIMPLES)
+====================================
+
+Exemplo mental:
+"Vou buscar dados na internet, mas isso demora"
+
+Código:
+
+function buscarDados() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve("Dados carregados");
+    }, 2000);
+  });
+}
+
+➡️ Aqui estamos CRIANDO uma Promise manualmente
+➡️ Depois de 2 segundos, ela se resolve
+
+
+====================================
+4. COMO USAR PROMISE (SEM ASYNC/AWAIT)
+====================================
+
+buscarDados()
+  .then(resultado => {
+    console.log(resultado);
+  })
+  .catch(erro => {
+    console.error(erro);
+  });
+
+❌ Funciona
+❌ Mas começa a ficar confuso em projetos grandes
+❌ Código cresce para a direita
+❌ Difícil de ler
+
+
+====================================
+5. POR QUE O ASYNC/AWAIT EXISTE?
+====================================
+
+Async/Await foi criado para:
+- Trabalhar com Promises
+- Mas escrever código como se fosse síncrono
+- Deixar tudo mais legível
+
+⚠️ IMPORTANTE:
+Async/Await NÃO substitui Promise
+Async/Await É UMA FORMA MAIS SIMPLES DE USAR Promise
+
+
+====================================
+6. O QUE É ASYNC (EXPLICAÇÃO PROFUNDA)
+====================================
+
+Quando você coloca "async" em uma função, você está dizendo:
+
+🧠 "Essa função pode demorar"
+🧠 "Não espere ela terminar agora"
+🧠 "Ela vai rodar de forma assíncrona"
+🧠 "Ela SEMPRE retorna uma Promise"
+
+Exemplo:
+
+async function exemplo() {
+  return 10;
+}
+
+Mesmo retornando 10,
+o retorno REAL é:
+Promise.resolve(10)
+
+➡️ async marca a função como:
+"Essa função trabalha com código que pode demorar"
+
+
+====================================
+7. O QUE ASYNC NÃO FAZ (IMPORTANTE)
+====================================
+
+❌ async NÃO faz o código rodar em paralelo
+❌ async NÃO cria multithread
+❌ async NÃO deixa o código mais rápido
+
+✔️ async apenas:
+- Evita travar o fluxo principal
+- Permite usar await
+- Retorna Promise automaticamente
+
+
+====================================
+8. O QUE É AWAIT (EXPLICAÇÃO PROFUNDA)
+====================================
+
+await significa literalmente:
+➡️ "ESPERE isso aqui terminar"
+
+Mas atenção:
+- await NÃO trava o JavaScript inteiro
+- await pausa APENAS aquela função async
+- O resto do sistema continua funcionando
+
+Exemplo:
+
+async function executar() {
+  const resultado = await buscarDados();
+  console.log(resultado);
+}
+
+➡️ A função espera a Promise resolver
+➡️ O JS continua vivo por fora
+
+
+====================================
+9. REGRA DE OURO DO AWAIT
+====================================
+
+await SÓ pode ser usado:
+✔️ Dentro de função async
+
+Isso NÃO funciona:
+const dados = await buscarDados(); ❌
+
+Isso funciona:
+async function f() {
+  const dados = await buscarDados(); ✔️
+}
+
+
+====================================
+10. CONEXÃO MENTAL (GUARDE ISSO)
+====================================
+
+Promise → representa algo futuro
+async   → diz que a função retorna Promise
+await   → espera a Promise resolver
+
+👉 Tudo gira em torno de Promise
+
+
+====================================
+11. FETCH E PROMISE (MUNDO REAL)
+====================================
+
+fetch() é uma função que:
+- SEMPRE retorna uma Promise
+
+Exemplo:
+const responsePromise = fetch(url);
+
+➡️ responsePromise ainda NÃO é a resposta
+➡️ É apenas a PROMISE da resposta
+
+
+====================================
+12. FETCH COM ASYNC/AWAIT
+====================================
+
+async function carregar() {
+  const response = await fetch(url);
+  const data = await response.json();
+  return data;
+}
+
+➡️ fetch retorna Promise
+➡️ await espera
+➡️ response.json também retorna Promise
+➡️ await espera novamente
+
+
+====================================
+13. COMPLEMENTO — EXEMPLO DO SEU PROJETO
+====================================
+
+Código:
+
+export async function getAllProducts(): Promise<Product[]> {
+
+  const response = await fetch(API_URL)
+
+  if (!response.ok){
+    throw new Error('Erro ao buscar produtos')
+  }
+
+  const data = (await response.json()) as Product[]
+
+  return data
+}
+
+EXPLICAÇÃO CONCEITUAL:
+
+1️⃣ async
+Você está dizendo:
+"Essa função busca dados externos e pode demorar"
+
+2️⃣ Retorno Promise<Product[]>
+Você deixa explícito no TypeScript:
+"Quem chamar essa função vai receber uma Promise de produtos"
+
+3️⃣ fetch
+fetch retorna uma Promise → await espera a resposta
+
+4️⃣ response.json
+Também retorna Promise → await espera os dados
+
+5️⃣ return data
+Isso vira automaticamente:
+Promise.resolve(data)
+
+➡️ Esse código está 100% alinhado com boas práticas
+➡️ É exatamente assim que projetos reais funcionam
+
+
+====================================
+14. RESUMÃO DA PARTE 1
+====================================
+
+- Promise é a base de tudo
+- async cria Promise automaticamente
+- await espera Promise
+- async NÃO trava o sistema
+- await pausa só a função
+- fetch trabalha com Promise
+- Seu código está correto e profissional
+
+========================================================
+FIM DA PARTE 1
+========================================================
+-->
