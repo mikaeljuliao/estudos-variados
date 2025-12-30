@@ -1,0 +1,319 @@
+<!--
+========================================================
+PARTE 2 — TRATAMENTO DE ERROS
+TRY / CATCH / FINALLY / THROW NEW ERROR
+Autor: Mikael Juliao
+Objetivo: Dominar fluxo de erro em código real
+========================================================
+
+
+====================================
+1. PRIMEIRO: POR QUE ERROS EXISTEM?
+====================================
+
+Em programação real, erros SÃO NORMAIS.
+
+Exemplos comuns:
+- API fora do ar
+- Internet indisponível
+- Servidor retornando erro 500
+- Dados inesperados
+- Falha de autenticação
+
+Sem tratamento de erro:
+❌ Aplicação quebra
+❌ Tela branca
+❌ Usuário perdido
+
+➡️ Tratar erros é OBRIGATÓRIO.
+
+
+====================================
+2. O QUE É UM ERRO NO JAVASCRIPT?
+====================================
+
+Erro é um OBJETO que representa uma falha.
+
+Exemplo:
+new Error("Mensagem de erro")
+
+Esse objeto contém:
+- message → descrição do erro
+- stack → onde o erro aconteceu (debug)
+
+
+====================================
+3. THROW — O QUE SIGNIFICA?
+====================================
+
+throw significa:
+➡️ LANÇAR um erro manualmente
+
+Quando um erro é lançado:
+- A execução para imediatamente
+- O JavaScript começa a procurar quem vai tratar esse erro
+
+
+====================================
+4. THROW NEW ERROR (NA PRÁTICA)
+====================================
+
+throw new Error("Algo deu errado");
+
+Isso:
+❌ Interrompe o código
+➡️ Cria um erro
+➡️ Envia o erro para quem chamou a função
+
+
+====================================
+5. O QUE É TRY / CATCH?
+====================================
+
+try/catch é usado para:
+- TENTAR executar um código
+- CAPTURAR erros se algo falhar
+
+Sintaxe básica:
+
+try {
+  // código que pode dar erro
+} catch (error) {
+  // código que trata o erro
+}
+
+
+====================================
+6. FLUXO REAL DE EXECUÇÃO
+====================================
+
+try {
+  fazAlgo();
+  fazOutraCoisa();
+} catch (error) {
+  trataErro();
+}
+
+Se fazAlgo() der erro:
+➡️ fazOutraCoisa() NÃO executa
+➡️ O fluxo pula direto para o catch
+
+
+====================================
+7. TRY / CATCH COM ASYNC / AWAIT
+====================================
+
+Quando usamos await:
+- Se a Promise for rejeitada
+- O erro cai automaticamente no catch
+
+Exemplo:
+
+async function executar() {
+  try {
+    const dados = await buscarDados();
+    console.log(dados);
+  } catch (error) {
+    console.error("Erro capturado:", error);
+  }
+}
+
+
+====================================
+8. EXEMPLO SEM TRY / CATCH (RUIM)
+====================================
+
+async function carregar() {
+  const response = await fetch(url);
+  return await response.json();
+}
+
+❌ Se fetch falhar → erro não tratado
+❌ Aplicação quebra
+
+
+====================================
+9. EXEMPLO COM TRY / CATCH (BOM)
+====================================
+
+async function carregar() {
+  try {
+    const response = await fetch(url);
+    return await response.json();
+  } catch (error) {
+    console.error("Erro ao carregar dados:", error);
+  }
+}
+
+✔️ Código protegido
+✔️ Erro tratado
+
+
+====================================
+10. THROW + TRY / CATCH (JUNTOS)
+====================================
+
+throw cria o erro
+catch trata o erro
+
+Exemplo:
+
+async function buscar() {
+  const response = await fetch(url);
+
+  if (!response.ok) {
+    throw new Error("Erro na API");
+  }
+
+  return await response.json();
+}
+
+Quem chama:
+
+try {
+  const dados = await buscar();
+} catch (error) {
+  console.log(error.message);
+}
+
+
+====================================
+11. COMO O ERRO "SOBE" NA APLICAÇÃO
+====================================
+
+Fluxo:
+1️⃣ Erro acontece
+2️⃣ throw lança o erro
+3️⃣ Função para
+4️⃣ Erro sobe para quem chamou
+5️⃣ Se não houver catch → aplicação quebra
+
+
+====================================
+12. AGORA O FINALMENTE (FINALLY)
+====================================
+
+finally é um bloco que:
+➡️ SEMPRE será executado
+➡️ Com erro ou sem erro
+
+Sintaxe completa:
+
+try {
+  // código que pode dar erro
+} catch (error) {
+  // trata o erro
+} finally {
+  // SEMPRE executa
+}
+
+
+====================================
+13. O QUE O FINALLY FAZ DE VERDADE?
+====================================
+
+O bloco finally:
+✔️ Executa se deu sucesso
+✔️ Executa se deu erro
+✔️ Executa mesmo com throw
+
+Ele NÃO serve para tratar erro.
+Ele serve para FINALIZAR algo.
+
+
+====================================
+14. QUANDO USAR FINALLY?
+====================================
+
+Use finally quando você precisa:
+- Encerrar loading
+- Fechar conexão
+- Limpar estado
+- Executar algo obrigatório no final
+
+Exemplo comum:
+
+setLoading(true);
+
+try {
+  const data = await buscarDados();
+} catch (error) {
+  setErro(error.message);
+} finally {
+  setLoading(false);
+}
+
+➡️ loading sempre termina, com erro ou sucesso
+
+
+====================================
+15. FINALLY COM ASYNC / AWAIT
+====================================
+
+async function carregar() {
+  try {
+    const response = await fetch(url);
+    return await response.json();
+  } catch (error) {
+    console.error(error);
+  } finally {
+    console.log("Requisição finalizada");
+  }
+}
+
+➡️ Mesmo se fetch falhar, o finally roda
+
+
+====================================
+16. O QUE NÃO FAZER COM FINALLY
+====================================
+
+❌ Não usar finally para tratar erro
+❌ Não colocar lógica pesada
+❌ Não substituir catch por finally
+
+catch trata erro  
+finally finaliza processo
+
+
+====================================
+17. SEU PROJETO + FINALLY (CONCEITO)
+====================================
+
+No seu projeto, o finally seria útil para:
+- Desligar loading
+- Atualizar UI
+- Garantir estado consistente
+
+Fluxo mental:
+try    → tenta buscar produtos
+catch  → trata erro
+finally→ encerra o processo
+
+
+====================================
+18. ERROS COMUNS DE INICIANTES
+====================================
+
+❌ Não usar finally quando precisa
+❌ Tratar erro no finally
+❌ Esquecer que finally sempre executa
+❌ Criar catch vazio
+
+
+====================================
+19. RESUMÃO DEFINITIVO DA PARTE 2
+====================================
+
+- try → tenta executar
+- catch → captura erro
+- throw → lança erro
+- Error → objeto de erro
+- finally → SEMPRE executa
+- finally NÃO trata erro
+- finally finaliza processo
+
+========================================================
+FIM DA PARTE 2
+========================================================
+-->
